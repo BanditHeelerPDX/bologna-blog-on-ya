@@ -6,7 +6,7 @@ const logout = async () => {
         });
 
         if (response.ok) {
-            document.location.replace('/login');
+            document.location.replace('/');
         } else {
             alert('Unable to log you out at this time. Do you even lift, bro?');
         }
