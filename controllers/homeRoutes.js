@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const Post = require('../models/Post');
-const authorized = require('../utils/auth');
 
 // Get the 10 most recent blog posts
 router.get('/', async (req, res) => {

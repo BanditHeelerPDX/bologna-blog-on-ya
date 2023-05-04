@@ -1,0 +1,29 @@
+<h1>Dashboard</h1>
+<h2>Recent Posts</h2>
+{{#each posts}}
+<div>
+<h3>{{title}}</h3>
+<p>{{content}}</p>
+<p>{{author}}</p>
+{{#if loggedIn}}
+    <button onclick="comment({{id}})" >Comment</button>
+{{/if}}
+{{#if loggedIn}}
+  {{#if isAuthor}}
+    <button onclick="updatePost({{id}})">Update</button>
+    <button onclick="deletePost({{id}})">Delete</button>
+  {{/if}}
+{{/if}}
+</div>
+{{/each}}
+
+<h2>Create New Post</h2>
+<form action="/create-post" method="post">
+<input type="text" name="title" placeholder="Title">
+<input type="text" name="content" placeholder="Content">
+<input type="submit" value="Create Post">
+</form>
+
+<h2>Search for Posts</h2>
+<input type="text" id="search" placeholder="Search">
+<button id="search-button">Search</button>
