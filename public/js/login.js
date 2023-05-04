@@ -20,29 +20,35 @@ const loginFormHandler = async (event) => {
         } catch (err) {
             console.error(err)
         }
+    } else {
+        alert('Please enter a valid email and password.');
     }
 };
 
 const signupFormHandler = async (event) => {
-event.preventDefault();
+  event.preventDefault();
 
-const email = document.querySelector('#email-signup').value.trim();
-const userName = email.split('@')[0];
-const password = document.querySelector('#password-signup').value.trim();
+  const email = document.querySelector('#email-signup').value.trim();
+  // const userName = email.split('@')[0];
+  const password = document.querySelector('#password-signup').value.trim();
 
-if (email && password) {
-  const response = await fetch('/api/users', {
-    method: 'POST',
-    body: JSON.stringify({ email, password }),
-    headers: { 'Content-Type': 'application/json' },
-  });
+  try {
+    const response = await fetch('/api/users', {
+      method: 'POST',
+      body: JSON.stringify({ email, password }),
+      headers: { 'Content-Type': 'application/json' },
+    });
 
-  if (response.ok) {
-    document.location.replace('/dashboard');
-  } else {
-    alert('You forgot to say the magic word.');
+    if (response.ok) {
+      document.location.replace('/dashboard');
+    } else {
+      const error = await response.json();
+      alert(error.message);
+    }
+  } catch (err) {
+    console.error(err);
+    alert('Something went wrong. Please try again later.');
   }
-}
 };
 
 document.querySelector('.login-form').addEventListener('submit', loginFormHandler);
